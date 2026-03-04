@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildWorld | Azizbek Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary: #1a472a;
+            --accent: #2ecc71;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        body {
+            background: var(--bg);
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+        /* Navigation */
+        
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        /* Hero */
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1470093851219-69951fcbb533?w=1200');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        /* Search & Filter Section */
+        
+        .controls {
+            max-width: 1200px;
+            margin: -30px auto 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #searchInput {
+            flex: 2;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            outline: none;
+            min-width: 250px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: none;
+            background: #f1f5f9;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        /* Grid */
+        
+        .grid {
+            max-width: 1300px;
+            margin: 0 auto 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+            transition: all 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .img-wrapper {
+            height: 220px;
+            position: relative;
+        }
+        
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .type-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .card-body p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .meta {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .meta b {
+            color: var(--primary);
+        }
+        
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 5% 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .controls {
+                flex-direction: column;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">WILDWORLD.</div>
+        <div style="font-size: 0.8rem; color: #64748b;">Frontend Project by Azizbek</div>
+    </nav>
+
+    <header class="hero">
+        <h1>Hayvonot Olami Ensiklopediyasi</h1>
+        <p>25+ hayvonlar haqida to'liq ma'lumot </p>
+    </header>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Ism yoki tur bo'yicha qidirish..." onkeyup="filterData()">
+        <button class="filter-btn active" onclick="filterType('All', this)">Hammasi</button>
+        <button class="filter-btn" onclick="filterType('Yirtqich', this)">Yirtqichlar</button>
+        <button class="filter-btn" onclick="filterType('O\'txo\'r', this)">O'txo'rlar</button>
+    </div>
+
+
+
+    <main class="grid" id="animalGrid"></main>
+
+    <footer>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p>Ushbu loyiha <b>Azizbek Gulomkhujayev</b> tomonidan Frontend ko'nikmalarini namoyish etish uchun yaratildi.</p>
+            <p style="margin-top: 10px; opacity: 0.7;">📍 Karshi, O'zbekiston | 🎓 IT Park Student</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">© 2026 WildWorld. Backend-siz, sof JS loyiha.</p>
+        </div>
+    </footer>
+
+    <script>
+        const animals = [{
+            name: "Arslon",
+            type: "Yirtqich",
+            weight: "190kg",
+            region: "Afrika",
+            img: "https://images.unsplash.com/photo-1614027164847-1b2809eb18e4?w=500",
+            desc: "Arslonlar guruh bo'lib yashaydigan yagona mushuksimonlardir."
+        }, {
+            name: "Yo'lbars",
+            type: "Yirtqich",
+            weight: "310kg",
+            region: "Osiyo",
+            img: "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=500",
+            desc: "Dunyo bo'yicha eng katta mushuk turi, ajoyib suzuvchidir."
+        }, {
+            name: "Fil",
+            type: "O'txo'r",
+            weight: "6000kg",
+            region: "Afrika",
+            img: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=500",
+            desc: "Ulkan xotira sohibi va eng og'ir quruqlik hayvoni."
+        }, {
+            name: "Qor qoploni",
+            type: "Yirtqich",
+            weight: "55kg",
+            region: "Uzbekistan",
+            img: "https://images.unsplash.com/photo-1541014741259-de529411b96a?w=500",
+            desc: "Tog'lar arvohi deb ataladi, juda noyob va himoyadagi tur."
+        }, {
+            name: "Jirafa",
+            type: "O'txo'r",
+            weight: "1200kg",
+            region: "Savanna",
+            img: "https://images.unsplash.com/photo-1547721064-36202335ddb2?w=500",
+            desc: "Dunyoning eng baland bo'yli hayvoni, bo'yni 2 metrdan uzun."
+        }, {
+            name: "Panda",
+            type: "O'txo'r",
+            weight: "100kg",
+            region: "Xitoy",
+            img: "https://images.unsplash.com/photo-1564349683136-77e08bef1ef1?w=500",
+            desc: "Kuniga 12 soat bambuk yeyish bilan band bo'ladi."
+        }, {
+            name: "Bo'ri",
+            type: "Yirtqich",
+            weight: "45kg",
+            region: "Yevroosiyo",
+            img: "https://images.unsplash.com/photo-1590273466070-40c466b4432c?w=500",
+            desc: "To'da intizomiga qat'iy amal qiluvchi aqlli yirtqich."
+        }, {
+            name: "Burgut",
+            type: "Qush",
+            weight: "6kg",
+            region: "Tog'lar",
+            img: "https://images.unsplash.com/photo-1450612623335-60c4462b4553?w=500",
+            desc: "O'tkir ko'zi bilan 3 km uzoqlikdagi o'ljani ko'radi."
+        }, {
+            name: "Akula",
+            type: "Baliq",
+            weight: "1100kg",
+            region: "Okean",
+            img: "https://images.unsplash.com/photo-1560273074-c930c7de7142?w=500",
+            desc: "300 million yildan beri o'zgarmasdan kelayotgan yirtqich."
+        }, {
+            name: "Kenguru",
+            type: "O'txo'r",
+            weight: "85kg",
+            region: "Avstraliya",
+            img: "https://images.unsplash.com/photo-1528150230181-99bbf794226c?w=500",
+            desc: "Faqat sakrab harakatlanadi, orqaga yura olmaydi."
+        }, {
+            name: "Zebra",
+            type: "O'txo'r",
+            weight: "350kg",
+            region: "Afrika",
+            img: "https://images.unsplash.com/photo-1501706369511-09479f34047b?w=500",
+            desc: "Har bir zebraning chiziqlari inson barmoq izi kabi noyob."
+        }, {
+            name: "Tulki",
+            type: "Yirtqich",
+            weight: "10kg",
+            region: "O'rmonlar",
+            img: "https://images.unsplash.com/photo-1516934024742-b461fba47600?w=500",
+            desc: "Juda ayyor va moslashuvchan kichik ovchi."
+        }, {
+            name: "Kiyik",
+            type: "O'txo'r",
+            weight: "200kg",
+            region: "O'rmon",
+            img: "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=500",
+            desc: "Tezkor va xushbichim shoxli o'txo'r."
+        }, {
+            name: "Gorilla",
+            type: "O'txo'r",
+            weight: "160kg",
+            region: "Jungli",
+            img: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=500",
+            desc: "Inson DNKsiga 98% o'xshash bo'lgan ulkan maymun."
+        }, {
+            name: "Timsoh",
+            type: "Yirtqich",
+            weight: "500kg",
+            region: "Tropiklar",
+            img: "https://images.unsplash.com/photo-1549240923-93a2e080e653?w=500",
+            desc: "Dinozavrlar davridan beri saqlanib qolgan yirtqich."
+        }, {
+            name: "Ilon (Kobra)",
+            type: "Yirtqich",
+            weight: "5kg",
+            region: "Osiyo",
+            img: "https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?w=500",
+            desc: "Zaharli va o'ta xavfli sudraluvchi."
+        }, {
+            name: "Toya",
+            type: "O'txo'r",
+            weight: "600kg",
+            region: "Sahro",
+            img: "https://images.unsplash.com/photo-1527552481057-37c2dd04a84d?w=500",
+            desc: "Sahro kemasi, suvsiz haftalab yashay oladi."
+        }, {
+            name: "Pingvin",
+            type: "Qush",
+            weight: "35kg",
+            region: "Antarktida",
+            img: "https://images.unsplash.com/photo-1517783999520-f068d7431a60?w=500",
+            desc: "Ucholmaydigan, lekin juda tez suzadigan qush."
+        }, {
+            name: "Begemot",
+            type: "O'txo'r",
+            weight: "1500kg",
+            region: "Daryolar",
+            img: "https://images.unsplash.com/photo-1563608779435-081440787e9b?w=500",
+            desc: "Katta bo'lsa ham quruqlikda odamdan tez yugura oladi."
+        }, {
+            name: "Ot",
+            type: "O'txo'r",
+            weight: "500kg",
+            region: "Global",
+            img: "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=500",
+            desc: "Insoniyatning eng yaqin ko'makchisi va sadoqatli do'sti."
+        }, {
+            name: "Toshbaqa",
+            type: "O'txo'r",
+            weight: "250kg",
+            region: "Okeanlar",
+            img: "https://images.unsplash.com/photo-1545284312-73010168393e?w=500",
+            desc: "150 yildan ko'proq umr ko'ruvchi xotirjam jonzot."
+        }, {
+            name: "Bo'g'ma ilon",
+            type: "Yirtqich",
+            weight: "100kg",
+            region: "Amazoniya",
+            img: "https://images.unsplash.com/photo-1531386151447-fd76ad50012f?w=500",
+            desc: "O'ljasini siqish yo'li bilan ov qiluvchi ulkan ilon."
+        }, {
+            name: "Koala",
+            type: "O'txo'r",
+            weight: "12kg",
+            region: "Avstraliya",
+            img: "https://images.unsplash.com/photo-1546182208-4e1a67042582?w=500",
+            desc: "Kuniga 20 soat uxlashni yaxshi ko'radi."
+        }, {
+            name: "Flamingo",
+            type: "Qush",
+            weight: "4kg",
+            region: "Ko'llar",
+            img: "https://images.unsplash.com/photo-1512108046123-101397850931?w=500",
+            desc: "Pushti rangi ularning oziqlanishiga bog'liq."
+        }, {
+            name: "Yaq (Qo'tos)",
+            type: "O'txo'r",
+            weight: "800kg",
+            region: "Tog'lar",
+            img: "https://images.unsplash.com/photo-1589412225852-d98c2557993a?w=500",
+            desc: "Baland tog'li hududlarda yashovchi junli sutemizuvchi."
+        }];
+
+        const grid = document.getElementById('animalGrid');
+        let currentFilter = 'All';
+
+        function render(data) {
+            grid.innerHTML = data.map(a => `
+                <div class="card">
+                    <div class="img-wrapper">
+                        <span class="type-badge">${a.type}</span>
+                        <img src="${a.img}" alt="${a.name}">
+                    </div>
+                    <div class="card-body">
+                        <h3>${a.name}</h3>
+                        <p>${a.desc}</p>
+                        <div class="meta">
+                            <span>Vazni: <b>${a.weight}</b></span>
+                            <span>Mintaqa: <b>${a.region}</b></span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterData() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = animals.filter(a =>
+                (currentFilter === 'All' || a.type === currentFilter) &&
+                (a.name.toLowerCase().includes(query) || a.type.toLowerCase().includes(query))
+            );
+            render(filtered);
+        }
+
+        function filterType(type, btn) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterData();
+        }
+
+        render(animals);
+    </script>
+</body>
+
+</html>
